@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted} from 'vue';
 
-//Valde att koda allting i samma fil eftersom detta är en ganska enkel SPA
-
 class Movie {
     Title: string;
     Price: number;
@@ -29,14 +27,16 @@ const phoneNumber = ref('');
 const email = ref('');
 
 const fetchMovies = async () => {
-    const response = await fetch('https://gist.githubusercontent.com/QeepyWebDev/da4075d9c46edcf00e444d4b4aae78df/raw/df61573e40eeb2b012aa36c60b23692064a1ce8f/my-movies.json'); //Hämtar filmerna
-    const movieData: Movie[] = await response.json(); //Filmerna lagras i en array
+const response = await fetch('https://gist.githubusercontent.com/QeepyWebDev/da4075d9c46edcf00e444d4b4aae78df/raw/df61573e40eeb2b012aa36c60b23692064a1ce8f/my-movies.json'); //Hämtar filmerna
+const movieData: Movie[] = await response.json(); //Filmerna lagras i en array
 
-    movies.value = movieData.map(movie => 
+  movies.value = movieData.map(movie => 
     new Movie(
       movie.Title, 
       movie.Price, 
-      movie.Poster));
+      movie.Poster
+    )
+  );
 };
 
 const resetSelectedSeats = () => {
@@ -90,14 +90,14 @@ const handleFormSubmit = () => {
 };
 
 onMounted(() => { //använder onMounted för att låta allting ladda i DOM innan något görs för att undvika null errors
-      fetchMovies();    
+    fetchMovies();    
 
-      const seats = document.querySelectorAll<HTMLElement>(".seat"); //Hämtar alla element med klassen ".seat"
+    const seats = document.querySelectorAll<HTMLElement>(".seat"); //Hämtar alla element med klassen ".seat"
 
-      seats.forEach(seat => { //for-each loop som lägger till on click event till alla seats
-        seat.addEventListener("click", () => toggleSeatSelection(seat));
-      });
-    });
+    seats.forEach(seat => { //for-each loop som lägger till on click event till alla seats
+      seat.addEventListener("click", () => toggleSeatSelection(seat));
+  });
+});
 </script>
 
 <template>
@@ -107,51 +107,51 @@ onMounted(() => { //använder onMounted för att låta allting ladda i DOM innan
         <div class="form-container">
           <p>You chose {{ seatCount }} seats for a total of {{ totalPrice }} SEK for the movie {{ selectedMovie?.Title }}.</p>
           <form @submit.prevent="handleFormSubmit">
-        <div class="form-group"> <!-- Enkel form för bokning -->
-          <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" v-model="firstName" required /> <!-- v-model används för att binda fältet till respektive data -->
-        </div>
+            <div class="form-group"> <!-- Enkel form för bokning -->
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" v-model="firstName" required /> <!-- v-model används för att binda fältet till respektive data -->
+            </div>
 
-        <div class="form-group">
-          <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" v-model="lastName" required />
-        </div>
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" v-model="lastName" required />
+            </div>
 
-        <div class="form-group">
-          <label for="phoneNumber">Phone Number:</label>
-          <input type="tel" id="phoneNumber" v-model="phoneNumber" required />
-        </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <input type="tel" id="phoneNumber" v-model="phoneNumber" required />
+            </div>
 
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" required />
-        </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" v-model="email" required />
+            </div>
 
-        <button type="submit">Confirm</button>
-        <button id="cancelButton" type="button" @click="closeBooking">Cancel</button>
-      </form>
+            <button type="submit">Confirm</button>
+            <button id="cancelButton" type="button" @click="closeBooking">Cancel</button>
+          </form>
     <h3 id="bookingConfirmed" v-if="bookingConfirmed===true"> Thank you for booking, we hope you enjoy the movie! </h3>
-  </div>
-      </div>
     </div>
+      </div>
+        </div>
 
     <div class="imageContainer">
-    <img v-if="selectedMovie" :src="selectedMovie.Poster" alt="Movie Poster" /> <!-- Om en film är vald kommer filmens affish att visas -->
-  </div>
+      <img v-if="selectedMovie" :src="selectedMovie.Poster" alt="Movie Poster" /> <!-- Om en film är vald kommer filmens affish att visas -->
+    </div>
     <div class="movie-container">
-    <label for="movie">Pick a movie:</label>
-    <select name="movie" id="movie" @change="updateSelectedMovie">
-      <!-- Vue använder ":key="movie.title" för att urskilja filmerna genom titel och :value för att binda movie.price till value. Viktigt eftersom value är vad som skickas in med submit -->
-      <option :value="null" disabled selected>Select a movie</option>
-      <option 
-        v-for="movie in movies" 
-        :key="movie.Title" 
-        :value="movie.Price" 
-      >
-        {{ movie.Title }} ({{ movie.Price }} kr)
-      </option>
-    </select>
-  </div>
+      <label for="movie">Pick a movie:</label>
+      <select name="movie" id="movie" @change="updateSelectedMovie">
+        <!-- Vue använder ":key="movie.title" för att urskilja filmerna genom titel och :value för att binda movie.price till value. Viktigt eftersom value är vad som skickas in med submit -->
+        <option :value="null" disabled selected>Select a movie</option>
+        <option 
+          v-for="movie in movies" 
+          :key="movie.Title" 
+          :value="movie.Price" 
+        >
+          {{ movie.Title }} ({{ movie.Price }} kr)
+        </option>
+      </select>
+    </div>
     <ul class="showcase">
       <li>
         <div class="seat"></div>
