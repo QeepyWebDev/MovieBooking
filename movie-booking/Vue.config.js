@@ -1,4 +1,3 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  publicPath: '/MovieBooking/'
-})
+module.exports = {
+  publicPath: '/MovieBooking/' // Replace 'MovieBooking' with your repository name
+};
