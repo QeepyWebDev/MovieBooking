@@ -11,7 +11,7 @@ class Movie {
     this.Price = Price;
     this.Poster = Poster;
   }
-}
+} 
 
 const selectedSeats = ref<number[]>([]); //Array för valda seats
 const movies = ref<Movie[]>([]); //Array för filmerna
