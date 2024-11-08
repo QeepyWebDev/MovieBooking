@@ -1,0 +1,5 @@
+Detta projekt byggde jag med Vue.js, jag valde Vue eftersom jag har läst att det är ganska populärt, inte lika svårt att lära sig som React/Angular och fungerar bra när man bygger SPAs. Det var även roligt att testa något nytt, och jag kommer att fortsätta med Vue under min praktik.
+Mitt misstag med projektet var att inte dela upp koden i olika filer, jag var för ivrig att börja koda och innan jag hann tänka på det så hade jag en väldigt stor mängd kod.
+Jag forskade lite i hur strukturen bör vara när man jobbar med Vue, och provade att gå efter det - så min tanke var att dela koden så där man väljer film, väljer seat och bokningen skulle vara separata komponenter. 
+Logiken för de olika komponenterna skulle ligga i så kallade "composables" alltså en egen mapp med t.ex. useSeat.ts där all logik för att välja seat skulle vara.
+Detta försökte jag att lösa i flera timmar med hjälp av exports och imports men hur jag än gjorde så kunde jag inte att få det att funka - men på den ljusa sidan så lärde jag mig en massa under tiden. 
