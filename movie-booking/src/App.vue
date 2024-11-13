@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router'
 
 class Movie {
     Title: string;
@@ -26,9 +25,6 @@ const firstName = ref(''); //Håller användarens info
 const lastName = ref('');
 const phoneNumber = ref('');
 const email = ref('');
-
-const route = useRoute()
-console.log(route)
 
 const fetchMovies = async () => {
 const response = await fetch('https://gist.githubusercontent.com/QeepyWebDev/da4075d9c46edcf00e444d4b4aae78df/raw/df61573e40eeb2b012aa36c60b23692064a1ce8f/my-movies.json'); //Hämtar filmerna
@@ -239,5 +235,4 @@ onMounted(() => { //använder onMounted för att låta allting ladda i DOM innan
     <button id="bookButton" @click="showBooking = true">Book seats</button>
   </body>
 
-  <RouterView />
 </template>

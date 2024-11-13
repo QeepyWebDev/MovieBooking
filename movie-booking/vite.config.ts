@@ -12,5 +12,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: './',  // Use relative paths for assets when deploying to a subfolder
+  base: './',
 });
